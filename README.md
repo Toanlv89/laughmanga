@@ -73,8 +73,8 @@
 11. npm install vhost --save                \----> create subdomains
 12. npm install mongoose --save             \----> package for working with database mongoDB.
 13. Connect to MongoDB Atlas database       
-14. npm install http-errors --save          \----> note errors for front-end dev
-15. npm install cors --save                 \----> enable CORS
+14. npm install cors --save                 \----> enable CORS
+15. npm install joi --save                  \----> validation
 
 ***
 # **FRONT-END:::: laughmanga:8000**
