@@ -1,0 +1,6 @@
+# dependencies BE
+/node_modules
+
+
+# dependencies FE
+../front-end/node_modules

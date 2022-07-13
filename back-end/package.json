@@ -1,0 +1,46 @@
+{
+    "name": "back-end",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint-staged": "lint-staged",
+        "prettier": "prettier --config ./src/configs/prettier.config.js --write **/*.{js,json} ../front-end/**/*.{js,json} --ignore-path .prettierignore",
+        "back-end": "nodemon index.js",
+        "front-end": "cd ../front-end && npm start",
+        "dev": "concurrently --kill-others-on-fail \"npm run back-end\" \"npm run front-end\"",
+        "prepare": "cd .. && husky install back-end/.husky"
+    },
+    "lint-staged": {
+        "**/*.{js,json}": [
+            "prettier --config ./src/configs/prettier.config.js --write --ignore-path .prettierignore",
+            "git add"
+        ],
+        "../front-end/**/*.{js,json}": [
+            "prettier --config ./src/configs/prettier.config.js --write --ignore-path .prettierignore",
+            "git add"
+        ]
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "concurrently": "^7.2.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "helmet": "^5.1.0",
+        "http-errors": "^2.0.0",
+        "husky": "^8.0.1",
+        "lint-staged": "^13.0.3",
+        "mongoose": "^6.4.4",
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.19",
+        "prettier": "^2.7.1",
+        "vhost": "^3.0.2"
+    }
+}
