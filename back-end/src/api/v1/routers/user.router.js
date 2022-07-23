@@ -1,57 +1,24 @@
-const user = require('../models/user.model')
-const joi = require('joi')
-const userValidate = require('../validations/user.validation')
+const {
+    register,
+    refreshToken,
+    login,
+    logout,
+    getListUsers,
+} = require('../controllers/user.controller')
+
+const {
+    verifyAccessToken,
+    verifyRefreshToken,
+} = require('../middlewares/verifyToken.middleware')
 
 module.exports = (router) => {
-    router.post('/register', async (req, res, next) => {
-        try {
-            const {value, error} = userValidate(req.body)
-            if (error) {
-                res.type('json').status(400).send({
-                    error: 'Bad Request',
-                    message: error.details[0].message,
-                    statusCode: 400,
-                })
-            }
+    router.post('/register', register)
 
-            const {userName, password} = value
-            isExist = await user.findOne({
-                userName,
-            })
+    router.post('/refesh-token', verifyRefreshToken, refreshToken)
 
-            if (isExist) {
-                res.type('json')
-                    .status(409)
-                    .send({
-                        error: 'Conflict',
-                        message: `${userName} has been registered!`,
-                        statusCode: 409,
-                    })
-            }
+    router.post('/login', login)
 
-            const newUser = await user.create({
-                userName,
-                password,
-            })
+    router.delete('/logout', verifyRefreshToken, logout)
 
-            return res.json({
-                status: 'Account is created successfully!',
-                data: newUser,
-            })
-        } catch (error) {
-            next(error)
-        }
-    })
-
-    router.get('/refesh-token', (req, res, next) => {
-        res.send('refesh-token function')
-    })
-
-    router.post('/login', (req, res, next) => {
-        res.send('login function')
-    })
-
-    router.get('/logout', (req, res, next) => {
-        res.send('logout function')
-    })
+    router.get('/getListUsers', verifyAccessToken, getListUsers)
 }
