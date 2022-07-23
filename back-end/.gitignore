@@ -7,5 +7,3 @@
 # misc
 .env
 /src/configs/authProviders.config.js
-/ssl/laughmanga.crt
-/ssl/laughmanga.pem
